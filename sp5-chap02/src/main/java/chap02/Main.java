@@ -18,12 +18,12 @@ public class Main {
         Greeter g = ctx.getBean("greeter", Greeter.class);
         String msg = g.greet("스프링");
         System.out.println(msg);
-        
+
         // 이 코드하고 차이가 뭐지? (위에 서술)
         Greeter g2 = new Greeter();
         g2.setFormat("%s, 안녕하세요!");
         g2.greet("스프링");
         System.out.println(msg);
         ctx.close();
-	}
+    }
 }
