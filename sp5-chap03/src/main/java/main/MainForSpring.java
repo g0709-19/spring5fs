@@ -4,11 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import assembler.Assembler;
-import config.AppContext;
+import config.AppConfig1;
+import config.AppConfig2;
+import config.AppConfigImport;
 import spring.ChangePasswordService;
 import spring.DuplicateMemberException;
 import spring.MemberInfoPrinter;
@@ -23,8 +26,9 @@ public class MainForSpring {
     private static ApplicationContext context = null;
     
     public static void main(String[] args) throws IOException {
-        context = new AnnotationConfigApplicationContext(AppContext.class);
-        
+//        context = new AnnotationConfigApplicationContext(AppContext.class);
+//        context = new AnnotationConfigApplicationContext(AppConfig1.class, AppConfig2.class);
+        context = new AnnotationConfigApplicationContext(AppConfigImport.class);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println("명령어를 입력하세요: ");
@@ -84,6 +88,7 @@ public class MainForSpring {
             printHelp();
             return;
         }
+//        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig1.class, AppConfig2.class);
         ChangePasswordService changePasswordService = context.getBean("changePasswordService", ChangePasswordService.class);
         try {
             changePasswordService.changePassword(args[1], args[2], args[3]);
@@ -93,6 +98,7 @@ public class MainForSpring {
         } catch (WrongIdPasswordException e) {
             System.out.println("이메일과 암호가 일치하지 않습니다.\n");
         }
+//        context.close();    // 지역 변수로 할당하면 닫아줘야 된다. (클래스 로더 누수 야기)
     }
     
     private static void printHelp() {
