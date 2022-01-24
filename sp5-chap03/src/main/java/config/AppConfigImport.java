@@ -11,13 +11,13 @@ import spring.MemberPrinter;
 @Import(AppConfig2.class)
 // @Import({AppConfig1.class, AppConfig2.class})
 public class AppConfigImport {
-    @Bean
-    public MemberDao memberDao() {
-        return new MemberDao();
-    }
-    
-    @Bean
-    public MemberPrinter memberPrinter() {
-        return new MemberPrinter();
-    }
+  @Bean
+  public MemberDao memberDao() {
+    return new MemberDao();
+  }
+
+  @Bean
+  public MemberPrinter memberPrinter() {
+    return new MemberPrinter();
+  }
 }
